@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { View, Text, Button, StyleSheet } from "react-native";
-import get from "../../models/actions/get"
+import { View, Text, Button, ScrollView } from "react-native";
+import orders from "../../models/orders"
 import config from "../../config/config.json";
-import * as base from "../../styles/base";
+import { Base, Forms, Typography, Unique } from "../../styles"
 
 export default function OrderList({ route, navigation }) {
   const { reload } = route.params || false;
@@ -13,7 +13,7 @@ export default function OrderList({ route, navigation }) {
   }
 
   async function reloadOrders() {
-    setAllOrders(await get.getOrders());
+    setAllOrders(await orders.getOrders());
   }
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function OrderList({ route, navigation }) {
     .filter(order => order.status === "Ny")
     .map((order, index) => {
       return <View
-        style={base.marginFive}
+        style={{ ...Forms.buttonConatiner }}
         key={index}
       >
         <Button
@@ -46,11 +46,11 @@ export default function OrderList({ route, navigation }) {
     });
 
   return (
-    <View>
-      <Text style={base.marginFive}>
+    <ScrollView style={{ ...Base.base }}>
+      <Text style={{ ...Base.marginFive }}>
         Ordrar redo att plockas
       </Text>
       {listOfOrders}
-    </View>
+    </ScrollView>
   );
 }

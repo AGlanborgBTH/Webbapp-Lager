@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { View, Button } from "react-native";
 import resetModule from "../models/reset";
 import get from "../models/actions/get"
-import * as base from "../styles/base"
+import { Base, Forms, Typography, Unique } from "../styles"
 
 export default function Reset({ route, navigation, setProducts }) {
   const [productsList, setProductsList] = useState([]);
@@ -19,8 +19,8 @@ export default function Reset({ route, navigation, setProducts }) {
   }
 
   return (
-    <SafeAreaView>
-      <View style={base.center}>
+    <SafeAreaView style={{ ...Base.base }}>
+      <View style={{ ...Unique.resetButton }}>
         <Button title={"Reset content"} onPress={reset} />
       </View>
     </SafeAreaView>

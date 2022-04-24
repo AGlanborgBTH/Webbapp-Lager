@@ -1,3 +1,7 @@
+export const base = {
+    flex: 1
+}
+
 export const rowCenter = {
     flexDirection: "row",
     justifyContent: "center"
@@ -36,10 +40,6 @@ export const marginTop = {
     marginTop: 5
 }
 
-export const itemsCenter = {
-    alignItems: 'center'
-}
-
 export const textLeft = {
     textAlign: 'left'
 }
@@ -52,16 +52,12 @@ export const maxWidth = {
     width: "100%"
 }
 
-export const center = {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    height: 550
+export const itemsCenter = {
+    alignItems: 'center'
 }
 
-export const divide = {
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgb(0, 0, 0)',
-    borderStyle: 'solid',
-    marginTop: 5
+export const box = {
+    borderWidth: 1,
+    borderType: "solid",
+    borderColor: "rgb(0, 0, 0)"
 }

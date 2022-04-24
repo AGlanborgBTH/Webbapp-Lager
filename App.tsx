@@ -1,27 +1,29 @@
 import { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Home from "./components/Home";
-import Pick from "./components/Pick";
-import Reset from "./components/Reset";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Home from "./components/Home";
+import Pick from "./components/Pick";
+import Deliveries from "./components/Deliveries";
+import Reset from "./components/Reset";
+import { Base, Forms, Typography, Unique } from "./styles"
 
 const Tab = createBottomTabNavigator();
 
 const routeIcons = {
   "Lager": "home",
   "Plock": "list",
-  "Reset": "reload",
+  "Reset": "reload-circle-outline",
+  "Inleverans": "clipboard-outline",
 };
 
 export default function App() {
   const [products, setProducts] = useState([]);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ ...Base.base }}>
       <NavigationContainer>
         <Tab.Navigator screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
@@ -34,13 +36,28 @@ export default function App() {
         })}
         >
           <Tab.Screen name="Lager">
-            {() => <Home products={products} setProducts={setProducts} />}
+            {() => <Home
+              products={products}
+              setProducts={setProducts}
+            />}
           </Tab.Screen>
           <Tab.Screen name="Plock">
-            {() => <Pick products={products} setProducts={setProducts} />}
+            {() => <Pick
+              products={products}
+              setProducts={setProducts}
+            />}
+          </Tab.Screen>
+          <Tab.Screen name="Inleverans">
+            {() => <Deliveries
+              products={products}
+              setProducts={setProducts}
+            />}
           </Tab.Screen>
           <Tab.Screen name="Reset">
-            {(screenProps) => <Reset {...screenProps} setProducts={setProducts}/>}
+            {(screenProps) => <Reset
+              {...screenProps}
+              setProducts={setProducts}
+            />}
           </Tab.Screen>
         </Tab.Navigator>
       </NavigationContainer>

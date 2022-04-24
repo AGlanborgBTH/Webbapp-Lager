@@ -20,5 +20,10 @@ export const normal = {
 
 export const evenHeader = {
     fontSize: 30,
-    lineHeight: 45
+    lineHeight: 45,
+}
+
+export const label = {
+    fontSize: 25,
+    lineHeight: 40,
 }

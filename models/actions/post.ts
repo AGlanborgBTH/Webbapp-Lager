@@ -1,51 +1,51 @@
 import config from "../../config/config.json";
 
-const update = {
-    putProduct: async function putProduct(product: object) {
+const add = {
+    postProduct: async function postProduct(product: object) {
         try {
             product["api_key"] = config.api_key
 
             await fetch(`${config.base_url}/products`, {
-                method: 'PUT',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(product)
             });
         } catch (error) {
-            console.log("Could not update Product")
+            console.log("Could not add to Product")
         }
     },
-    putOrder: async function putOrder(order: object) {
+    postOrder: async function postOrder(order: object) {
         try {
             order["api_key"] = config.api_key
 
             await fetch(`${config.base_url}/orders`, {
-                method: 'PUT',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(order)
             });
         } catch (error) {
-            console.log("Could not update Order")
+            console.log("Could not add to Order")
         }
     },
-    putDelivery: async function putDelivery(delivery: object) {
+    postDelivery: async function postDelivery(delivery: object) {
         try {
             delivery["api_key"] = config.api_key
 
             await fetch(`${config.base_url}/deliveries`, {
-                method: 'PUT',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(delivery)
             });
         } catch (error) {
-            console.log("Could not update Delivery")
+            console.log("Could not add to Delivery")
         }
     },
 };
 
-export default update;
+export default add;

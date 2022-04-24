@@ -1,4 +1,5 @@
 import config from "../config/config.json";
+import add from "./actions/post"
 
 const reset = {
     resetData: async function resetData() {
@@ -11,9 +12,9 @@ const reset = {
                 body: JSON.stringify({ "api_key": config.api_key })
             });
         } catch (error) {
-            console.log("Could not Reset")
+            console.log("Reset failed")
         }
-    },
+    }
 };
 
 export default reset;

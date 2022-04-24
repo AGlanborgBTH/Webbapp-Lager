@@ -1,15 +1,14 @@
 import { Image, View, Text, ScrollView } from 'react-native';
-//import PostList from './components/PostList';
-import Stock from './List/StockList';
+//import Post from './PartHome/PostList';
+import Stock from './PartHome/StockList';
 import warehouse from '../assets/warehouse.jpg';
-import * as typography from "../styles/typography"
-import * as base from "../styles/base"
+import { Base, Forms, Typography, Unique } from "../styles"
 
 export default function Home({ products, setProducts }) {
   return (
-    <ScrollView>
-      <Text style={[typography.evenHeader, base.marginTen]}>Lager-Appen</Text>
-      <View style={base.itemsCenter}>
+    <ScrollView style={{ ...Base.base }}>
+      <Text style={[{ ...Typography.evenHeader }, { ...Base.marginTen }]}>Lager-Appen</Text>
+      <View style={{ ...Base.itemsCenter }}>
         <Image source={warehouse} style={{ width: 320, height: 240 }} />
       </View>
       <Stock products={products} setProducts={setProducts} />

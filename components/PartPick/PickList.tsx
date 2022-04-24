@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, ScrollView } from "react-native";
 import orderModel from "../../models/orders";
-import get from "../../models/actions/get";
-import * as base from "../../styles/base"
+import productModel from "../../models/products";
+import { Base, Forms, Typography, Unique } from "../../styles"
 
 export default function PickList({ route, navigation, setProducts }) {
   const { order } = route.params;
@@ -10,12 +10,12 @@ export default function PickList({ route, navigation, setProducts }) {
   let check = 1;
 
   useEffect(async () => {
-    setProductsList(await get.getProducts());
+    setProductsList(await productModel.getProducts());
   }, []);
 
   async function pick() {
     await orderModel.pickOrder(order);
-    setProducts(await get.getProducts());
+    setProducts(await productModel.getProducts());
     navigation.navigate("List", { reload: true });
   }
 
@@ -25,7 +25,7 @@ export default function PickList({ route, navigation, setProducts }) {
     }
 
     return <View
-      style={base.marginFive}
+      style={{ ...Base.marginFive }}
       key={index}
     >
       <Text>
@@ -35,18 +35,18 @@ export default function PickList({ route, navigation, setProducts }) {
   });
 
   return (
-    <View style={base.marginFive}>
-      <Text style={base.marginLeft}>{order.name}</Text>
-      <Text style={base.marginLeft}>{order.address}</Text>
-      <Text style={base.marginLeft}>{order.zip} {order.city}</Text>
+    <ScrollView style={[{ ...Base.base }, { ...Base.marginFive }]}>
+      <Text style={{ ...Base.marginLeft }}>{order.name}</Text>
+      <Text style={{ ...Base.marginLeft }}>{order.address}</Text>
+      <Text style={{ ...Base.marginLeft }}>{order.zip} {order.city}</Text>
 
-      <View style={base.divide}></View>
+      <View style={{ ...Unique.divide }}></View>
 
-      <Text style={base.marginTop}>Produkter:</Text>
+      <Text style={{ ...Base.marginTop }}>Produkter:</Text>
 
       {orderItemsList}
 
-      <View style={base.marginFive}>
+      <View style={{ ...Base.marginFive }}>
         { check ? 
           <Button title="Plocka order" onPress={pick} /> : 
           <Text>
@@ -54,6 +54,6 @@ export default function PickList({ route, navigation, setProducts }) {
           </Text> 
         }
       </View>
-    </View>
+    </ScrollView>
   )
 };
