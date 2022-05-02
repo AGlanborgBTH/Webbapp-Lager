@@ -31,3 +31,7 @@ export const delList = {
 export const br = {
     margin: 15
 }
+
+export const darker = {
+    backgroundColor: 'rgba(0, 0, 0, 0.1)'
+}

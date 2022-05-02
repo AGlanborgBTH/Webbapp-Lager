@@ -19,7 +19,7 @@ function ProductDropDown(props) {
 
   const itemsList = products.map((prod, index) => {
     productsHash[prod.id] = prod;
-    return <Picker.Item style={{ ...Forms.pickerInput }} key={index} label={prod.name} value={prod.id} />;
+    return <Picker.Item style={{ ...Forms.pickerItem }} key={index} label={prod.name} value={prod.id} />;
   });
 
   return (
@@ -89,7 +89,7 @@ export default function DeliveryForm({ navigation, setProducts }) {
     <ScrollView style={Base.base}>
       <Text style={[{ ...Typography.evenHeader }, { ...Base.marginTen }]}>Ny inleverans</Text>
 
-      <Text style={[ Typography.label, Base.marginLeft ]}>Produkt</Text>
+      <Text style={[{ ...Typography.label }, { ...Base.marginLeft}]}>Produkt</Text>
       <ProductDropDown
         delivery={delivery}
         setDelivery={setDelivery}

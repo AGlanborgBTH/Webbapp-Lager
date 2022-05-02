@@ -22,11 +22,11 @@ export default function DeliveriesList({ route, navigation }) {
 
   const listOfDeliveries = allDeliveries.map((delivery, index) => {
     return <View style={[{ ...Base.marginTen }, { ...Base.box }, { ...Unique.delList }]} key={index}>
-      <Text style={{ ...marginLeft }}>
+      <Text style={[{ ...marginLeft }, { ...Typography.normal }]}>
         {delivery.product_name} - {delivery.amount}
       </Text>
       <View style={{ ...Unique.divide }}></View>
-      <Text>
+      <Text style={{ ...Typography.normal }}>
         {delivery.comment}
       </Text>
     </View>;

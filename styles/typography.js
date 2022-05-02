@@ -27,3 +27,14 @@ export const label = {
     fontSize: 25,
     lineHeight: 40,
 }
+
+export const stackText = {
+    fontSize: 20,
+    lineHeight: 30,
+    fontWeight: 'bold'
+}
+
+export const stackTextValue = {
+    fontSize: 20,
+    lineHeight: 30,
+}

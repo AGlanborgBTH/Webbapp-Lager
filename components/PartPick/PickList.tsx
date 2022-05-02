@@ -28,7 +28,7 @@ export default function PickList({ route, navigation, setProducts }) {
       style={{ ...Base.marginFive }}
       key={index}
     >
-      <Text>
+      <Text style={{ ...Typography.normal }}>
         {item.name} - {item.amount} - {item.location}
       </Text>
     </View>;
@@ -36,20 +36,20 @@ export default function PickList({ route, navigation, setProducts }) {
 
   return (
     <ScrollView style={[{ ...Base.base }, { ...Base.marginFive }]}>
-      <Text style={{ ...Base.marginLeft }}>{order.name}</Text>
-      <Text style={{ ...Base.marginLeft }}>{order.address}</Text>
-      <Text style={{ ...Base.marginLeft }}>{order.zip} {order.city}</Text>
+      <Text style={[{ ...Base.marginLeft }, { ...Typography.normal }]}>{order.name}</Text>
+      <Text style={[{ ...Base.marginLeft }, { ...Typography.normal }]}>{order.address}</Text>
+      <Text style={[{ ...Base.marginLeft }, { ...Typography.normal }]}>{order.zip} {order.city}</Text>
 
       <View style={{ ...Unique.divide }}></View>
 
-      <Text style={{ ...Base.marginTop }}>Produkter:</Text>
+      <Text style={[{ ...Base.marginTop }, { ...Typography.normal }]}>Produkter:</Text>
 
       {orderItemsList}
 
       <View style={{ ...Base.marginFive }}>
         { check ? 
           <Button title="Plocka order" onPress={pick} /> : 
-          <Text>
+          <Text  style={{ ...Typography.normal }}>
             There are not enough items in stock!
           </Text> 
         }

@@ -16,7 +16,7 @@ export const picker = {
     color: "rgb(255, 255, 255)"
 }
 
-export const pickerInput = {
+export const pickerItem = {
     color: "rgb(0, 0, 0)"
 }
 

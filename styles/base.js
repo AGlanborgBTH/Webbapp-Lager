@@ -61,3 +61,17 @@ export const box = {
     borderType: "solid",
     borderColor: "rgb(0, 0, 0)"
 }
+
+export const stack = {
+    width: '80%',
+    marginLeft: '10%',
+    marginTop: 10,
+    marginBottom: 10
+}
+
+export const stackItem = {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 10
+}

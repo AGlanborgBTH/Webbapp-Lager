@@ -9,11 +9,32 @@ export default function StockList({ products, setProducts }) {
     setProducts(await pro.getProducts());
   }, []);
 
-  const list = products.map((product, index) => {
+  const oldList = products.map((product, index) => {
     return <Text key={index} style={{ ...Typography.normal }}>
       {product.name} - {product.stock}
     </Text>
   });
+
+  const newList = products.map((product, index) => {
+    return <View key={index} style={{ ...Base.stack }}>
+      <View style={[{ ...Base.stackItem }, { ...Unique.darker }]}>
+        <Text style={{ ...Typography.stackText }}>
+          Product Name
+        </Text>
+        <Text style={{ ...Typography.stackTextValue }}>
+          {product.name}
+        </Text>
+      </View>
+      <View style={[{ ...Base.stackItem }]}>
+        <Text style={{ ...Typography.stackText }}>
+          Stock
+        </Text>
+        <Text style={{ ...Typography.stackTextValue }}>
+          {product.stock}
+        </Text>
+      </View>
+    </View>
+  })
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -27,8 +48,8 @@ export default function StockList({ products, setProducts }) {
 
 
   return (
-    <View style={[{ ...Unique.extremeMarginLeft }, { ...Base.marginTop }]}>
-      {list}
+    <View style={{ ...Base.marginTop }}>
+        {newList}
     </View>
   );
 }
