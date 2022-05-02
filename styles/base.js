@@ -40,6 +40,10 @@ export const marginTop = {
     marginTop: 5
 }
 
+export const paddingTen = {
+    padding: 10
+}
+
 export const textLeft = {
     textAlign: 'left'
 }
@@ -57,14 +61,21 @@ export const itemsCenter = {
 }
 
 export const box = {
+    width: '85%',
     borderWidth: 1,
     borderType: "solid",
-    borderColor: "rgb(0, 0, 0)"
+    borderColor: "rgb(0, 0, 0)",
+    marginTop: 10,
+    marginBottom: 10
+
+}
+
+export const boxMargin = {
+    marginLeft: '7.5%'
 }
 
 export const stack = {
-    width: '80%',
-    marginLeft: '10%',
+    width: '85%',
     marginTop: 10,
     marginBottom: 10
 }

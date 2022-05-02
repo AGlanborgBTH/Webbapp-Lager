@@ -20,7 +20,7 @@ export default function DeliveriesList({ route, navigation }) {
     reloadDeliveries();
   }, []);
 
-  const listOfDeliveries = allDeliveries.map((delivery, index) => {
+  const oldListOfDeliveries = allDeliveries.map((delivery, index) => {
     return <View style={[{ ...Base.marginTen }, { ...Base.box }, { ...Unique.delList }]} key={index}>
       <Text style={[{ ...marginLeft }, { ...Typography.normal }]}>
         {delivery.product_name} - {delivery.amount}
@@ -32,10 +32,39 @@ export default function DeliveriesList({ route, navigation }) {
     </View>;
   });
 
+  const newListOfDeliveries = allDeliveries.map((delivery, index) => {
+    return <View style={[{ ...Base.box }, { ...Base.boxMargin }]} key={index}>
+      <View style={[{ ...Base.stackItem }, { ...Unique.bluer },]}>
+        <Text style={{ ...Typography.stackText }}>
+          Product name
+        </Text>
+        <Text style={{ ...Typography.stackTextValue }}>
+          {delivery.product_name}
+        </Text>
+      </View>
+      <View style={[{ ...Base.stackItem }]}>
+        <Text style={{ ...Typography.stackText }}>
+          Amount
+        </Text>
+        <Text style={{ ...Typography.stackTextValue }}>
+          {delivery.amount}
+        </Text>
+      </View>
+      <View style={{ ...Unique.divide }} />
+      <View style={{ ...Base.paddingTen }} >
+        <Text style={{ ...Typography.normal }}>
+          {delivery.comment}
+        </Text>
+      </View>
+    </View>
+  });
+
   return (
     <ScrollView style={Base.base}>
-      <Text style={[{ ...Typography.evenHeader }, { ...Base.marginLeft }]}>Inleveranser</Text>
-      {listOfDeliveries}
+      <Text style={[{ ...Typography.evenHeader }, { ...Base.boxMargin }]}>
+        Inleveranser
+      </Text>
+      {newListOfDeliveries}
       <View style={{ ...Forms.buttonConatiner }}>
         <Button
           title="Skapa ny inleverans"

@@ -16,7 +16,7 @@ export default function StockList({ products, setProducts }) {
   });
 
   const newList = products.map((product, index) => {
-    return <View key={index} style={{ ...Base.stack }}>
+    return <View key={index} style={[{ ...Base.stack }, { ...Base.boxMargin }]}>
       <View style={[{ ...Base.stackItem }, { ...Unique.darker }]}>
         <Text style={{ ...Typography.stackText }}>
           Product Name

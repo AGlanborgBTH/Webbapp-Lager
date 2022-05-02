@@ -19,7 +19,7 @@ export default function PickList({ route, navigation, setProducts }) {
     navigation.navigate("List", { reload: true });
   }
 
-  const orderItemsList = order.order_items.map((item, index) => {
+  const oldOrderItemsList = order.order_items.map((item, index) => {
     if (item.amount > item.stock) {
       check = 0;
     }
@@ -34,24 +34,55 @@ export default function PickList({ route, navigation, setProducts }) {
     </View>;
   });
 
+  const newOrderItemsList = order.order_items.map((item, index) => {
+    if (item.amount > item.stock) {
+      check = 0;
+    }
+
+    return <View key={index} style={[{ ...Base.stack }, { ...Base.boxMargin }]}>
+      <View style={[{ ...Base.stackItem }, { ...Unique.darker },]}>
+        <Text style={{ ...Typography.stackText }}>
+          Item Name
+        </Text>
+        <Text style={{ ...Typography.stackTextValue }}>
+          {item.name}
+        </Text>
+      </View>
+      <View style={[{ ...Base.stackItem }]}>
+        <Text style={{ ...Typography.stackText }}>
+          Amount
+        </Text>
+        <Text style={{ ...Typography.stackTextValue }}>
+          {item.amount}
+        </Text>
+      </View>
+      <View style={[{ ...Base.stackItem }]}>
+        <Text style={{ ...Typography.stackText }}>
+          Location
+        </Text>
+        <Text style={{ ...Typography.stackTextValue }}>
+          {item.location}
+        </Text>
+      </View>
+    </View>
+  });
+
   return (
-    <ScrollView style={[{ ...Base.base }, { ...Base.marginFive }]}>
-      <Text style={[{ ...Base.marginLeft }, { ...Typography.normal }]}>{order.name}</Text>
+    <ScrollView style={[{ ...Base.base }]}>
+      <Text style={[{ ...Typography.header2 }, { ...Unique.darker }]}>{order.name}</Text>
       <Text style={[{ ...Base.marginLeft }, { ...Typography.normal }]}>{order.address}</Text>
       <Text style={[{ ...Base.marginLeft }, { ...Typography.normal }]}>{order.zip} {order.city}</Text>
 
       <View style={{ ...Unique.divide }}></View>
 
-      <Text style={[{ ...Base.marginTop }, { ...Typography.normal }]}>Produkter:</Text>
-
-      {orderItemsList}
+      {newOrderItemsList}
 
       <View style={{ ...Base.marginFive }}>
-        { check ? 
-          <Button title="Plocka order" onPress={pick} /> : 
-          <Text  style={{ ...Typography.normal }}>
+        {check ?
+          <Button title="Plocka order" onPress={pick} /> :
+          <Text style={{ ...Typography.normal }}>
             There are not enough items in stock!
-          </Text> 
+          </Text>
         }
       </View>
     </ScrollView>
