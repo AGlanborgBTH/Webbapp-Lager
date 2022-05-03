@@ -10,13 +10,14 @@ import Product from '../../interfaces/product';
 
 
 function ProductDropDown(props) {
+  const [products, setProducts] = useState<Partial<Product[]>>([]);
   let productsHash: any = {};
 
   useEffect(async () => {
-    props.setProducts(await productModel.getProducts());
+    setProducts(await productModel.getProducts());
   }, []);
 
-  const itemsList = props.products.map((prod, index) => {
+  const itemsList = products.map((prod, index) => {
     productsHash[prod.id] = prod;
     return <Picker.Item style={{ ...Forms.pickerItem }} key={index} label={prod.name} value={prod.id} />;
   });
