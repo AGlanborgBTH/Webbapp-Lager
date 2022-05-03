@@ -9,17 +9,11 @@ export default function StockList({ products, setProducts }) {
     setProducts(await pro.getProducts());
   }, []);
 
-  const oldList = products.map((product, index) => {
-    return <Text key={index} style={{ ...Typography.normal }}>
-      {product.name} - {product.stock}
-    </Text>
-  });
-
   const newList = products.map((product, index) => {
     return <View key={index} style={[{ ...Base.stack }, { ...Base.boxMargin }]}>
       <View style={[{ ...Base.stackItem }, { ...Unique.darker }]}>
         <Text style={{ ...Typography.stackText }}>
-          Product Name
+          Product
         </Text>
         <Text style={{ ...Typography.stackTextValue }}>
           {product.name}

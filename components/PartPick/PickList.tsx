@@ -19,21 +19,6 @@ export default function PickList({ route, navigation, setProducts }) {
     navigation.navigate("List", { reload: true });
   }
 
-  const oldOrderItemsList = order.order_items.map((item, index) => {
-    if (item.amount > item.stock) {
-      check = 0;
-    }
-
-    return <View
-      style={{ ...Base.marginFive }}
-      key={index}
-    >
-      <Text style={{ ...Typography.normal }}>
-        {item.name} - {item.amount} - {item.location}
-      </Text>
-    </View>;
-  });
-
   const newOrderItemsList = order.order_items.map((item, index) => {
     if (item.amount > item.stock) {
       check = 0;
@@ -42,7 +27,7 @@ export default function PickList({ route, navigation, setProducts }) {
     return <View key={index} style={[{ ...Base.stack }, { ...Base.boxMargin }]}>
       <View style={[{ ...Base.stackItem }, { ...Unique.darker },]}>
         <Text style={{ ...Typography.stackText }}>
-          Item Name
+          Item
         </Text>
         <Text style={{ ...Typography.stackTextValue }}>
           {item.name}

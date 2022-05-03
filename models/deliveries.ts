@@ -3,13 +3,13 @@ import get from "./actions/get";
 import post from "./actions/post";
 
 const Delivery = {
-    getDelivery: async function putOrder() {
+    getDelivery: async function getDelivery() {
         return await get.getDelivery()
     },
-    putDelivery: async function putOrder(delivery: object) {
+    putDelivery: async function putDelivery(delivery: object) {
         await put.putDelivery(delivery)
     },
-    addDelivery: async function putOrder(delivery: object) {
+    addDelivery: async function addDelivery(delivery: object) {
         await post.postDelivery(delivery)
     }
 };

@@ -46,6 +46,25 @@ const add = {
             console.log("Could not add to Delivery")
         }
     },
+    postLogin: async function postLogin(login: object) {
+        try {
+            login["api_key"] = config.api_key
+
+            const response = await fetch(`${config.base_url}/auth/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(login)
+            });
+
+            const result = await response.json();
+
+            return result.data.message;
+        } catch (error) {
+            console.log("Could not add to Login")
+        }
+    },
 };
 
 export default add;

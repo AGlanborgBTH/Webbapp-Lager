@@ -3,10 +3,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { View, Button } from "react-native";
 import resetModule from "../models/reset";
 import get from "../models/actions/get"
+import delivery from "../models/deliveries"
 import { Base, Forms, Typography, Unique } from "../styles"
 
 export default function Reset({ route, navigation, setProducts }) {
   const [productsList, setProductsList] = useState([]);
+  const [allDeliveries, setAllDeliveries] = useState([]);
 
   useEffect(async () => {
     setProductsList(await get.getProducts());
@@ -14,7 +16,10 @@ export default function Reset({ route, navigation, setProducts }) {
 
   async function reset() {
     await resetModule.resetData();
+
+    setAllDeliveries(await delivery.getDelivery());
     setProducts(await get.getProducts());
+
     navigation.navigate("Lager", { reload: true });
   }
 
