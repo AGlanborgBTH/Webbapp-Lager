@@ -22,10 +22,14 @@ export const pickerItem = {
 
 export const buttonConatiner = {
     width: "90%",
-    margin: 10,
     marginLeft: "5%",
 }
 
 export const button = {
     padding: 10
+}
+
+export const slimButton = {
+    marginLeft: "20%",
+    width: "60%"
 }

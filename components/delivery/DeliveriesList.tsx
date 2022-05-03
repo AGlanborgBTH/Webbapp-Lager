@@ -22,7 +22,7 @@ export default function DeliveriesList({ route, navigation }) {
   const newListOfDeliveries = allDeliveries.map((delivery, index) => {
     return <View style={[{ ...Base.stack }, { ...Base.boxMargin }]} key={index}>
       <View style={[{ ...Base.stackItem }, { ...Unique.darker },]}>
-        <Text style={{ ...Typography.stackText }}>
+        <Text style={[{ ...Typography.stackText }]}>
           Product
         </Text>
         <Text style={{ ...Typography.stackTextValue }}>
@@ -30,7 +30,7 @@ export default function DeliveriesList({ route, navigation }) {
         </Text>
       </View>
       <View style={[{ ...Base.stackItem }]}>
-        <Text style={{ ...Typography.stackText }}>
+        <Text style={[{ ...Typography.stackText }]}>
           Amount
         </Text>
         <Text style={{ ...Typography.stackTextValue }}>
@@ -48,11 +48,11 @@ export default function DeliveriesList({ route, navigation }) {
 
   return (
     <ScrollView style={Base.base}>
-      <Text style={[{ ...Typography.evenHeader }, { ...Base.boxMargin }]}>
+      <Text style={[{ ...Typography.header2 }, { ...Base.boxMargin }]}>
         Inleveranser
       </Text>
       {newListOfDeliveries}
-      <View style={{ ...Forms.buttonConatiner }}>
+      <View style={[{ ...Forms.slimButton }, { ...Base.marginTen }]}>
         <Button
           title="Skapa ny inleverans"
           onPress={() => {

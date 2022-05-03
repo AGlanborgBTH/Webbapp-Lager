@@ -2,7 +2,7 @@ import put from "./actions/put";
 import get from "./actions/get";
 import post from "./actions/post";
 
-const Delivery = {
+const delivery = {
     getDelivery: async function getDelivery() {
         return await get.getDelivery()
     },
@@ -14,4 +14,4 @@ const Delivery = {
     }
 };
 
-export default Delivery;
+export default delivery;

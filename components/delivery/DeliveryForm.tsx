@@ -10,14 +10,13 @@ import Product from '../../interfaces/product';
 
 
 function ProductDropDown(props) {
-  const [products, setProducts] = useState<Partial<Product[]>>([]);
   let productsHash: any = {};
 
   useEffect(async () => {
-    setProducts(await productModel.getProducts());
+    props.setProducts(await productModel.getProducts());
   }, []);
 
-  const itemsList = products.map((prod, index) => {
+  const itemsList = props.products.map((prod, index) => {
     productsHash[prod.id] = prod;
     return <Picker.Item style={{ ...Forms.pickerItem }} key={index} label={prod.name} value={prod.id} />;
   });
@@ -44,7 +43,7 @@ function DateDropDown(props) {
   };
 
   return (
-    <View style={{ ...Forms.buttonConatiner }}>
+    <View style={[{ ...Forms.buttonConatiner }, { ...Base.marginTen }]}>
       {Platform.OS === "android" && (
         <Button onPress={showDatePicker} title="Visa datumväljare" />
       )}
@@ -89,50 +88,56 @@ export default function DeliveryForm({ navigation, setProducts }) {
     <ScrollView style={Base.base}>
       <Text style={[{ ...Typography.evenHeader }, { ...Base.marginTen }]}>Ny inleverans</Text>
 
-      <Text style={[{ ...Typography.label }, { ...Base.marginLeft}]}>Produkt</Text>
-      <ProductDropDown
-        delivery={delivery}
-        setDelivery={setDelivery}
-        setCurrentProduct={setCurrentProduct}
-      />
-      <View style={{ ...Unique.br }}></View>
-      <Text style={[{ ...Typography.label }, { ...Base.marginLeft }]}>Antal</Text>
-      <TextInput
-        style={{ ...Forms.input }}
-        onChangeText={(content: string) => {
-          setDelivery({ ...delivery, amount: parseInt(content) })
-        }}
-        value={delivery?.amount?.toString()}
-        keyboardType="numeric"
-      />
-      <View style={{ ...Unique.br }}></View>
-      <Text style={{ ...Typography.label }}>Datum</Text>
-      <TextInput
-        style={{ ...Forms.input }}
-        value={delivery?.delivery_date?.toString()}
-        editable={false}
-      />
-      <DateDropDown
-        delivery={delivery}
-        setDelivery={setDelivery}
-      />
-      <View style={{ ...Unique.br }}></View>
-      <Text style={{ ...Typography.label }}>Kommentar</Text>
-      <TextInput
-        style={{ ...Forms.input }}
-        onChangeText={(content: string) => {
-          setDelivery({ ...delivery, comment: content })
-        }}
-        value={delivery?.comment}
-      />
-      <View style={{ ...Unique.br }}></View>
-      <View style={{ ...Forms.buttonConatiner }}>
-        <Button
-          title="Skapa inleverans"
-          onPress={() => {
-            addDelivery();
-          }}
+      <View style={{ ...Base.marginTen }}>
+        <Text style={[{ ...Typography.label }, { ...Base.marginLeft }]}>Produkt</Text>
+        <ProductDropDown
+          delivery={delivery}
+          setDelivery={setDelivery}
+          setCurrentProduct={setCurrentProduct}
         />
+      </View>
+      <View style={{ ...Base.marginTen }}>
+        <Text style={[{ ...Typography.label }, { ...Base.marginLeft }]}>Antal</Text>
+        <TextInput
+          style={{ ...Forms.input }}
+          onChangeText={(content: string) => {
+            setDelivery({ ...delivery, amount: parseInt(content) })
+          }}
+          value={delivery?.amount?.toString()}
+          keyboardType="numeric"
+        />
+      </View>
+      <View style={{ ...Base.marginTen }}>
+        <Text style={{ ...Typography.label }}>Datum</Text>
+        <TextInput
+          style={{ ...Forms.input }}
+          value={delivery?.delivery_date?.toString()}
+          editable={false}
+        />
+        <DateDropDown
+          delivery={delivery}
+          setDelivery={setDelivery}
+        />
+      </View>
+      <View style={{ ...Base.marginTen }}>
+        <Text style={{ ...Typography.label }}>Kommentar</Text>
+        <TextInput
+          style={{ ...Forms.input }}
+          onChangeText={(content: string) => {
+            setDelivery({ ...delivery, comment: content })
+          }}
+          value={delivery?.comment}
+        />
+      </View>
+      <View style={{ ...Base.marginTen }}>
+        <View style={{ ...Forms.buttonConatiner }}>
+          <Button
+            title="Skapa inleverans"
+            onPress={() => {
+              addDelivery();
+            }}
+          />
+        </View>
       </View>
     </ScrollView>
   );

@@ -3,5 +3,5 @@ export default interface Delivery {
     product_name: string,
     amount: number,
     delivery_date: string,
-    comment: string,
+    comment: string
 }

@@ -9,5 +9,5 @@ export default interface Order {
     country: string,
     status: string,
     status_id: number,
-    order_items: Array<Partial<Product>>,
+    order_items: Array<Partial<Product>>
 }

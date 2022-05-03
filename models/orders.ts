@@ -7,9 +7,9 @@ const orders = {
     pickOrder: async function pickOrder(order: Partial<Order>) {
         for (const product of order["order_items"]) {
             let pro = {
-                id: product.product_id,
+                id: product["product_id"],
                 name: product.name,
-                stock: product.stock - product.amount,
+                stock: product.stock - product["amount"],
                 api_key: config.api_key
             }
 

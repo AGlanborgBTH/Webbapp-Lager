@@ -30,7 +30,7 @@ export default function OrderList({ route, navigation }) {
     .filter(order => order.status === "Ny")
     .map((order, index) => {
       return <View
-        style={{ ...Forms.buttonConatiner }}
+        style={[{ ...Forms.slimButton }, { ...Base.marginTen }]}
         key={index}
       >
         <Button
@@ -47,7 +47,7 @@ export default function OrderList({ route, navigation }) {
 
   return (
     <ScrollView style={{ ...Base.base }}>
-      <Text style={{ ...Base.marginFive }}>
+      <Text style={[{ ...Base.marginFive }, { ...Typography.normal }]}>
         Ordrar redo att plockas
       </Text>
       {listOfOrders}

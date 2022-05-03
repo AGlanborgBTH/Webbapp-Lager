@@ -18,9 +18,7 @@ export const divide = {
 }
 
 export const resetButton = {
-    marginTop: 250,
-    marginLeft: '20%',
-    maxWidth: '60%'
+    marginTop: 250
 }
 
 export const delList = {

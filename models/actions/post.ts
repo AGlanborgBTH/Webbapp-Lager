@@ -46,7 +46,26 @@ const add = {
             console.log("Could not add to Delivery")
         }
     },
-    postLogin: async function postLogin(login: object) {
+    login: async function login(login: object) {
+        try {
+            login["api_key"] = config.api_key
+
+            const response = await fetch(`${config.base_url}/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(login)
+            });
+
+            const result = await response.json();
+
+            return result;
+        } catch (error) {
+            console.log("Could not add to Login")
+        }
+    },
+    register: async function register(login: object) {
         try {
             login["api_key"] = config.api_key
 
@@ -62,7 +81,22 @@ const add = {
 
             return result.data.message;
         } catch (error) {
-            console.log("Could not add to Login")
+            console.log("Could not add to Register")
+        }
+    },
+    postInvoice: async function postInvoice(invoice: object, token: string) {
+        try {
+            invoice["api_key"] = config.api_key
+
+            await fetch(`${config.base_url}/deliveries`, {
+                method: 'POST',
+                headers: {
+                    'x-access-token': token
+                },
+                body: JSON.stringify(invoice)
+            });
+        } catch (error) {
+            console.log("Could not add to Invoice")
         }
     },
 };
