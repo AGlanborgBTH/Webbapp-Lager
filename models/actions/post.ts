@@ -79,7 +79,7 @@ const add = {
 
             const result = await response.json();
 
-            return result.data.message;
+            return result.data;
         } catch (error) {
             console.log("Could not add to Register")
         }
@@ -88,15 +88,17 @@ const add = {
         try {
             invoice["api_key"] = config.api_key
 
-            await fetch(`${config.base_url}/deliveries`, {
+            await fetch(`${config.base_url}/invoices`, {
                 method: 'POST',
                 headers: {
-                    'x-access-token': token
+                    'x-access-token': token,
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(invoice)
             });
         } catch (error) {
             console.log("Could not add to Invoice")
+            console.log(error)
         }
     },
 };

@@ -1,7 +1,6 @@
 import put from "./actions/put";
 import get from "./actions/get";
 import Order from "../interfaces/order"
-import config from "../config/config.json"
 
 const orders = {
     pickOrder: async function pickOrder(order: Partial<Order>) {
@@ -9,8 +8,7 @@ const orders = {
             let pro = {
                 id: product["product_id"],
                 name: product.name,
-                stock: product.stock - product["amount"],
-                api_key: config.api_key
+                stock: product.stock - product["amount"]
             }
 
             await put.putProduct(pro)
@@ -18,8 +16,7 @@ const orders = {
         let ord = {
             id: order["id"],
             name: order["name"],
-            status_id: 200,
-            api_key: config.api_key
+            status_id: 200
         }
 
         await put.putOrder(ord)

@@ -37,3 +37,7 @@ export const stackTextValue = {
     fontSize: 20,
     lineHeight: 30,
 }
+
+export const center = {
+    textAlign: 'center'
+}

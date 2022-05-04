@@ -6,5 +6,6 @@ export default interface Product {
     specifiers: object,
     stock: number,
     location: string,
-    price: number
+    price: number,
+    amount: number
 }
