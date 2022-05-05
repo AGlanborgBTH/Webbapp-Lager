@@ -42,7 +42,7 @@ export default function StockList({ products, setProducts }) {
 
 
   return (
-    <View style={{ ...Base.marginTop }}>
+    <View style={{ ...Base.marginTen }}>
         {newList}
     </View>
   );

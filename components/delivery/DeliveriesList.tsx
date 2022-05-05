@@ -48,7 +48,7 @@ export default function DeliveriesList({ route, navigation }) {
 
   return (
     <ScrollView style={Base.base}>
-      <Text style={[{ ...Typography.header2 }, { ...Base.boxMargin }]}>
+      <Text style={[{ ...Typography.header1 }, { ...Base.boxMargin }]}>
         Inleveranser
       </Text>
       {newListOfDeliveries}

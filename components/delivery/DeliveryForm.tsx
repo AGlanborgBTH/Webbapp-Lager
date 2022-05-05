@@ -44,7 +44,7 @@ function DateDropDown(props) {
   };
 
   return (
-    <View style={[{ ...Forms.buttonConatiner }, { ...Base.marginTen }]}>
+    <View style={[{ ...Forms.buttonContainer }, { ...Base.marginTen }]}>
       {Platform.OS === "android" && (
         <Button onPress={showDatePicker} title="Visa datumväljare" />
       )}
@@ -87,7 +87,7 @@ export default function DeliveryForm({ navigation, setProducts }) {
 
   return (
     <ScrollView style={Base.base}>
-      <Text style={[{ ...Typography.evenHeader }, { ...Base.marginTen }]}>Ny inleverans</Text>
+      <Text style={[{ ...Typography.header2 }, { ...Base.marginTen }]}>Ny inleverans</Text>
 
       <View style={{ ...Base.marginTen }}>
         <Text style={[{ ...Typography.label }, { ...Base.marginLeft }]}>Produkt</Text>
@@ -131,7 +131,7 @@ export default function DeliveryForm({ navigation, setProducts }) {
         />
       </View>
       <View style={{ ...Base.marginTen }}>
-        <View style={{ ...Forms.buttonConatiner }}>
+        <View style={{ ...Forms.buttonContainer }}>
           <Button
             title="Skapa inleverans"
             onPress={() => {

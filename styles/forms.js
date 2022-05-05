@@ -20,13 +20,9 @@ export const pickerItem = {
     color: "rgb(0, 0, 0)"
 }
 
-export const buttonConatiner = {
+export const buttonContainer = {
     width: "90%",
     marginLeft: "5%",
-}
-
-export const button = {
-    padding: 10
 }
 
 export const slimButton = {

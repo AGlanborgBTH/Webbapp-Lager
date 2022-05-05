@@ -26,7 +26,7 @@ export default function PickList({ route, navigation, setProducts }) {
 
     return <View key={index} style={[{ ...Base.stack }, { ...Base.boxMargin }]}>
       <View style={[{ ...Base.stackItem }, { ...Unique.darker },]}>
-        <Text style={{ ...Typography.stackText }}>
+        <Text style={[{ ...Typography.stackText }]}>
           Item
         </Text>
         <Text style={{ ...Typography.stackTextValue }}>
@@ -34,7 +34,7 @@ export default function PickList({ route, navigation, setProducts }) {
         </Text>
       </View>
       <View style={[{ ...Base.stackItem }]}>
-        <Text style={{ ...Typography.stackText }}>
+        <Text style={[{ ...Typography.stackText }]}>
           Amount
         </Text>
         <Text style={{ ...Typography.stackTextValue }}>
@@ -42,7 +42,7 @@ export default function PickList({ route, navigation, setProducts }) {
         </Text>
       </View>
       <View style={[{ ...Base.stackItem }]}>
-        <Text style={{ ...Typography.stackText }}>
+        <Text style={[{ ...Typography.stackText }]}>
           Location
         </Text>
         <Text style={{ ...Typography.stackTextValue }}>
@@ -54,7 +54,7 @@ export default function PickList({ route, navigation, setProducts }) {
 
   return (
     <ScrollView style={[{ ...Base.base }]}>
-      <Text style={[{ ...Typography.header2 }, { ...Unique.darker }]}>{order.name}</Text>
+      <Text style={[{ ...Typography.header1 }, { ...Unique.darker }]}>{order.name}</Text>
       <Text style={[{ ...Base.marginLeft }, { ...Typography.normal }]}>{order.address}</Text>
       <Text style={[{ ...Base.marginLeft }, { ...Typography.normal }]}>{order.zip} {order.city}</Text>
 
@@ -62,7 +62,7 @@ export default function PickList({ route, navigation, setProducts }) {
 
       {newOrderItemsList}
 
-      <View style={{ ...Base.marginFive }}>
+      <View style={{ ...Base.marginTen }}>
         {check ?
           <Button title="Plocka order" onPress={pick} /> :
           <Text style={{ ...Typography.normal }}>

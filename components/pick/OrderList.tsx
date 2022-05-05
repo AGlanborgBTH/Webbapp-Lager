@@ -47,7 +47,7 @@ export default function OrderList({ route, navigation }) {
 
   return (
     <ScrollView style={{ ...Base.base }}>
-      <Text style={[{ ...Base.marginFive }, { ...Typography.normal }]}>
+      <Text style={[{ ...Base.marginTen }, { ...Typography.normal }]}>
         Ordrar redo att plockas
       </Text>
       {listOfOrders}
