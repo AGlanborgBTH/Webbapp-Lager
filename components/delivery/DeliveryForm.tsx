@@ -82,7 +82,7 @@ export default function DeliveryForm({ navigation, setProducts }) {
     await productModel.putProduct(updatedProduct);
 
     setProducts(await productModel.getProducts());
-    navigation.navigate("List", { reload: true });
+    navigation.navigate("Inlevernas lista", { reload: true });
   }
 
   return (

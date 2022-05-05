@@ -6,9 +6,11 @@ const Stack = createNativeStackNavigator();
 
 export default function Auth() {
   return (
-    <Stack.Navigator initialRouteName="Invoice">
-      <Stack.Screen name="Invoice list" component={List} />
-      <Stack.Screen name="Invoice form" component={Form} />
+    <Stack.Navigator initialRouteName="Faktura">
+      <Stack.Screen name="Faktura lista" component={List} />
+      <Stack.Screen name="Faktura formulär">
+        {(screenProps) => <Form {...screenProps} />}
+      </Stack.Screen>
     </Stack.Navigator>
   );
 };

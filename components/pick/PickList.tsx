@@ -16,7 +16,7 @@ export default function PickList({ route, navigation, setProducts }) {
   async function pick() {
     await orderModel.pickOrder(order);
     setProducts(await productModel.getProducts());
-    navigation.navigate("List", { reload: true });
+    navigation.navigate("Plock lista", { reload: true });
   }
 
   const newOrderItemsList = order.order_items.map((item, index) => {

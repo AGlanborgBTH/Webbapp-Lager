@@ -12,3 +12,7 @@ export const resetButton = {
 export const darker = {
     backgroundColor: 'rgba(0, 0, 0, 0.1)'
 }
+
+export const bluer = {
+    backgroundColor: "rgba(33, 150, 243, 0.3)"
+}

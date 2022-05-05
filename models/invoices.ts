@@ -38,7 +38,7 @@ const invoices = {
         let ord = {
             id: order.id,
             name: order.name,
-            status_id: 300
+            status_id: 600
         }
 
         await put.putOrder(ord)

@@ -1,48 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Platform, ScrollView, Text, TextInput, Button, View } from "react-native";
-import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Base, Forms, Typography, Unique } from "../../styles"
 import invoiceModel from "../../models/invoices";
-import orderModel from '../../models/orders'
 import Order from '../../interfaces/order';
 import Invoice from '../../interfaces/invoice';
-
-
-function InvoiceDropDown(props) {
-  const [orders, setOrders] = useState<Partial<Order[]>>([]);
-  let ordersHash: any = {};
-
-  useEffect(async () => {
-    const ord = await orderModel.getOrders()
-    const final = []
-
-    ord.forEach((obj: object) => {
-      if (obj["status_id"] == 200) {
-        final.push(obj)
-      }
-    });
-
-    setOrders(final);
-  }, []);
-
-  const ordersList = orders.map((order, index) => {
-    ordersHash[order.id] = order;
-    return <Picker.Item style={{ ...Forms.pickerItem }} key={index} label={order.name} value={order.id} />;
-  });
-
-  return (
-    <Picker
-      style={{ ...Forms.picker }}
-      selectedValue={props.invoice?.id}
-      onValueChange={(itemValue) => {
-        props.setInvoice({ ...props.order, order_id: itemValue });
-        props.setCurrentOrder(ordersHash[itemValue]);
-      }}>
-      {ordersList}
-    </Picker>
-  );
-}
 
 function DateDropDown(props) {
   const [dropDownDate, setDropDownDate] = useState<Date>(new Date());
@@ -76,14 +38,18 @@ function DateDropDown(props) {
   );
 }
 
-export default function DeliveryForm({ navigation }) {
+export default function DeliveryForm({ route, navigation }) {
+  let { order } = route.params;
   const [invoice, setInvoice] = useState<Partial<Invoice>>({});
-  const [currentOrder, setCurrentOrder] = useState<Partial<Order>>({});
+
+  useEffect(async () => {
+    setInvoice({ ...order, order_id: order.id })
+  }, []);
 
   async function addDelivery() {
-    await invoiceModel.pickInvoice(invoice, currentOrder)
+    await invoiceModel.pickInvoice(invoice, order)
 
-    navigation.navigate("Invoice list", { reload: true });
+    navigation.navigate("Faktura lista", { reload: true });
   }
 
   return (
@@ -92,10 +58,10 @@ export default function DeliveryForm({ navigation }) {
 
       <View style={{ ...Base.marginTen }}>
         <Text style={[{ ...Typography.label }, { ...Base.marginLeft }]}>Produkt</Text>
-        <InvoiceDropDown
-          invoice={invoice}
-          setInvoice={setInvoice}
-          setCurrentOrder={setCurrentOrder}
+        <TextInput
+          style={{ ...Forms.input }}
+          value={order.name}
+          editable={false}
         />
       </View>
       <View style={{ ...Base.marginTen }}>

@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { View, Text, Button, ScrollView } from "react-native";
-import orders from "../../models/orders"
-import config from "../../config/config.json";
 import { Base, Forms, Typography, Unique } from "../../styles"
+import orders from "../../models/orders"
 
 export default function OrderList({ route, navigation }) {
   const { reload } = route.params || false;
@@ -20,14 +19,8 @@ export default function OrderList({ route, navigation }) {
     reloadOrders();
   }, []);
 
-  useEffect(() => {
-    fetch(`${config.base_url}/orders?api_key=${config.api_key}`)
-      .then(response => response.json())
-      .then(result => setAllOrders(result.data));
-  }, []);
-
   const listOfOrders = allOrders
-    .filter(order => order.status === "Ny")
+    .filter(order => order.status_id === 100)
     .map((order, index) => {
       return <View
         style={[{ ...Forms.slimButton }, { ...Base.marginTen }]}
@@ -37,7 +30,7 @@ export default function OrderList({ route, navigation }) {
           title={order.name}
 
           onPress={() => {
-            navigation.navigate('Details', {
+            navigation.navigate('Plock formulär', {
               order: order
             });
           }}
@@ -47,10 +40,18 @@ export default function OrderList({ route, navigation }) {
 
   return (
     <ScrollView style={{ ...Base.base }}>
-      <Text style={[{ ...Base.marginTen }, { ...Typography.normal }]}>
-        Ordrar redo att plockas
+      <Text style={[{ ...Base.marginTen }, { ...Typography.header2 }]}>
+        Väntande ordrar
       </Text>
-      {listOfOrders}
+      {listOfOrders.length ? listOfOrders : (
+        <View style={[{ ...Base.stack }, { ...Base.boxMargin }]}>
+        <View style={[{ ...Base.stackItem }, { ...Unique.darker }]}>
+          <Text style={[{ ...Typography.stackText }]}>
+            Inga väntande Ordrar
+          </Text>
+        </View>
+      </View>
+      )}
     </ScrollView>
   );
 }

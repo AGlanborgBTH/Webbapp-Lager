@@ -8,6 +8,7 @@ import Home from "./components/home/Home";
 import Pick from "./components/pick/Pick";
 import Deliveries from "./components/delivery/Deliveries";
 import Invoices from "./components/invoices/Invoices";
+import Dispatch from "./components/dispatch/Dispatch";
 import Auth from "./components/auth/Auth"
 import Reset from "./components/Reset";
 import authModel from "./models/auth"
@@ -16,11 +17,12 @@ import { Base, Forms, Typography, Unique } from "./styles"
 const Tab = createBottomTabNavigator();
 
 const routeIcons = {
-  "Lager": "home",
-  "Plock": "list",
+  "Lager": "home-outline",
+  "Plock": "list-outline",
   "Inleverans": "clipboard-outline",
-  "Logga in": "log-in",
-  "Faktura": "cash",
+  "Leverans": "map-outline",
+  "Logga in": "log-in-outline",
+  "Faktura": "cash-outline",
   "Reset": "reload-circle-outline"
 };
 
@@ -57,18 +59,25 @@ export default function App() {
               setProducts={setProducts}
             />}
           </Tab.Screen>
+          <Tab.Screen name="Leverans">
+            {() => <Dispatch />}
+          </Tab.Screen>
+          {isLoggedIn ?
+            <Tab.Screen name="Faktura">
+              {() => <Invoices />}
+            </Tab.Screen> :
+            <Tab.Screen name="Logga in">
+              {() => <Auth
+                setIsLoggedIn={setIsLoggedIn}
+              />}
+            </Tab.Screen>
+          }
           <Tab.Screen name="Inleverans">
             {() => <Deliveries
               products={products}
               setProducts={setProducts}
             />}
           </Tab.Screen>
-          {isLoggedIn ?
-            <Tab.Screen name="Faktura" component={Invoices} /> :
-            <Tab.Screen name="Logga in">
-              {() => <Auth setIsLoggedIn={setIsLoggedIn} />}
-            </Tab.Screen>
-          }
           <Tab.Screen name="Reset">
             {(screenProps) => <Reset
               {...screenProps}

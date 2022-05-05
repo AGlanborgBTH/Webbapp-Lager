@@ -48,18 +48,18 @@ export default function DeliveriesList({ route, navigation }) {
 
   return (
     <ScrollView style={Base.base}>
-      <Text style={[{ ...Typography.header1 }, { ...Base.boxMargin }]}>
+      <Text style={[{ ...Base.marginTen }, { ...Typography.header2 }]}>
         Inleveranser
       </Text>
-      {newListOfDeliveries}
       <View style={[{ ...Forms.slimButton }, { ...Base.marginTen }]}>
         <Button
           title="Skapa ny inleverans"
           onPress={() => {
-            navigation.navigate('Form');
+            navigation.navigate('Inlevernas formulär');
           }}
         />
       </View>
+      {newListOfDeliveries}
     </ScrollView>
   );
 };

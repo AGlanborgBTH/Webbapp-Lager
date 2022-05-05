@@ -13,7 +13,7 @@ export default function StockList({ products, setProducts }) {
     return <View key={index} style={[{ ...Base.stack }, { ...Base.boxMargin }]}>
       <View style={[{ ...Base.stackItem }, { ...Unique.darker }]}>
         <Text style={[{ ...Typography.stackText }]}>
-          Product
+          Produkt
         </Text>
         <Text style={{ ...Typography.stackTextValue }}>
           {product.name}
@@ -21,7 +21,7 @@ export default function StockList({ products, setProducts }) {
       </View>
       <View style={[{ ...Base.stackItem }]}>
         <Text style={[{ ...Typography.stackText }]}>
-          Stock
+          Lager
         </Text>
         <Text style={{ ...Typography.stackTextValue }}>
           {product.stock}
