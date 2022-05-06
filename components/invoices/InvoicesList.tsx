@@ -12,6 +12,7 @@ export default function InvoicesList({ route, navigation }) {
 
   if (reload) {
     reloadInvoices();
+    route.params.reload = false
   }
 
   async function reloadInvoices() {

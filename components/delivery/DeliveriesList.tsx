@@ -9,6 +9,7 @@ export default function DeliveriesList({ route, navigation }) {
 
   if (reload) {
     reloadDeliveries();
+    route.params.reload = false
   }
 
   async function reloadDeliveries() {

@@ -10,6 +10,7 @@ export default function DispatchList({ route, navigation }) {
 
   if (reload) {
     reloadOrders();
+    route.params.reload = false
   }
 
   async function reloadOrders() {

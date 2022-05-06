@@ -9,6 +9,7 @@ export default function OrderList({ route, navigation }) {
 
   if (reload) {
     reloadOrders();
+    route.params.reload = false
   }
 
   async function reloadOrders() {
