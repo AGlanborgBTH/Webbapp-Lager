@@ -60,7 +60,8 @@ export default function App() {
             />}
           </Tab.Screen>
           <Tab.Screen name="Leverans">
-            {() => <Dispatch />}
+            {() => <Dispatch
+            />}
           </Tab.Screen>
           {isLoggedIn ?
             <Tab.Screen name="Faktura">

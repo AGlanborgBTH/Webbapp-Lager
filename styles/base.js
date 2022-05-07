@@ -34,3 +34,14 @@ export const stackItem = {
     justifyContent: 'space-between',
     padding: 10
 }
+
+export const container = {
+    flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "center",
+}
+
+export const map = {
+    width: '100%',
+    height: 250
+}

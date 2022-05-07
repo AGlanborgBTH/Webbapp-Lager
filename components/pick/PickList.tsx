@@ -24,37 +24,39 @@ export default function PickList({ route, navigation, setProducts }) {
       check = 0;
     }
 
-    return <View key={index} style={[{ ...Base.stack }, { ...Base.boxMargin }]}>
-      <View style={[{ ...Base.stackItem }, { ...Unique.darker },]}>
-        <Text style={[{ ...Typography.stackText }]}>
-          Item
-        </Text>
-        <Text style={{ ...Typography.stackTextValue }}>
-          {item.name}
-        </Text>
+    return (
+      <View key={index} style={[{ ...Base.stack }, { ...Base.boxMargin }]}>
+        <View style={[{ ...Base.stackItem }, { ...Unique.darker },]}>
+          <Text style={[{ ...Typography.stackText }]}>
+            Item
+          </Text>
+          <Text style={{ ...Typography.stackTextValue }}>
+            {item.name}
+          </Text>
+        </View>
+        <View style={[{ ...Base.stackItem }]}>
+          <Text style={[{ ...Typography.stackText }]}>
+            Amount
+          </Text>
+          <Text style={{ ...Typography.stackTextValue }}>
+            {item.amount}
+          </Text>
+        </View>
+        <View style={[{ ...Base.stackItem }]}>
+          <Text style={[{ ...Typography.stackText }]}>
+            Location
+          </Text>
+          <Text style={{ ...Typography.stackTextValue }}>
+            {item.location}
+          </Text>
+        </View>
       </View>
-      <View style={[{ ...Base.stackItem }]}>
-        <Text style={[{ ...Typography.stackText }]}>
-          Amount
-        </Text>
-        <Text style={{ ...Typography.stackTextValue }}>
-          {item.amount}
-        </Text>
-      </View>
-      <View style={[{ ...Base.stackItem }]}>
-        <Text style={[{ ...Typography.stackText }]}>
-          Location
-        </Text>
-        <Text style={{ ...Typography.stackTextValue }}>
-          {item.location}
-        </Text>
-      </View>
-    </View>
+    )
   });
 
   return (
     <ScrollView style={[{ ...Base.base }]}>
-      <Text style={[{ ...Typography.header1 }, { ...Unique.darker }]}>{order.name}</Text>
+      <Text style={[{ ...Typography.header1 }, { ...Unique.bluer }]}>{order.name}</Text>
       <Text style={[{ ...Base.marginLeft }, { ...Typography.normal }]}>{order.address}</Text>
       <Text style={[{ ...Base.marginLeft }, { ...Typography.normal }]}>{order.zip} {order.city}</Text>
 

@@ -23,36 +23,45 @@ export default function OrderList({ route, navigation }) {
   const listOfOrders = allOrders
     .filter(order => order.status_id === 100)
     .map((order, index) => {
-      return <View
-        style={[{ ...Forms.slimButton }, { ...Base.marginTen }]}
-        key={index}
-      >
-        <Button
-          title={order.name}
+      return (
+        <View style={[{ ...Base.stack }, { ...Base.boxMargin }]} key={index}>
+          <View style={[{ ...Base.stackItem }, { ...Unique.bluer },]}>
+            <Text style={[{ ...Typography.stackText }]}>
+              Name
+            </Text>
+            <Text style={{ ...Typography.stackTextValue }}>
+              {order.name}
+            </Text>
+          </View>
+          <View style={[{ ...Forms.slimButton }, { ...Base.marginTen }]}>
+            <Button
+              title={"Visa order"}
 
-          onPress={() => {
-            navigation.navigate('Plock formulär', {
-              order: order
-            });
-          }}
-        />
-      </View>
+              onPress={() => {
+                navigation.navigate('Plock formulär', {
+                  order: order
+                });
+              }}
+            />
+          </View>
+        </View>
+      )
     });
 
-  return (
-    <ScrollView style={{ ...Base.base }}>
-      <Text style={[{ ...Base.marginTen }, { ...Typography.header2 }]}>
-        Väntande ordrar
-      </Text>
-      {listOfOrders.length ? listOfOrders : (
-        <View style={[{ ...Base.stack }, { ...Base.boxMargin }]}>
+return (
+  <ScrollView style={{ ...Base.base }}>
+    <Text style={[{ ...Base.marginTen }, { ...Typography.header2 }]}>
+      Väntande ordrar
+    </Text>
+    {listOfOrders.length ? listOfOrders : (
+      <View style={[{ ...Base.stack }, { ...Base.boxMargin }]}>
         <View style={[{ ...Base.stackItem }, { ...Unique.darker }]}>
           <Text style={[{ ...Typography.stackText }]}>
             Inga väntande Ordrar
           </Text>
         </View>
       </View>
-      )}
-    </ScrollView>
-  );
+    )}
+  </ScrollView>
+);
 }

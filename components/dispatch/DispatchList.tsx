@@ -24,7 +24,7 @@ export default function DispatchList({ route, navigation }) {
   const listOfDeliveries = allOrders.filter((order) => order.status_id === 200).map((order, index) => {
     return (
       <View style={[{ ...Base.stack }, { ...Base.boxMargin }]} key={index}>
-        <View style={[{ ...Base.stackItem }, { ...Unique.darker },]}>
+        <View style={[{ ...Base.stackItem }, { ...Unique.bluer },]}>
           <Text style={[{ ...Typography.stackText }]}>
             Name
           </Text>
@@ -34,7 +34,7 @@ export default function DispatchList({ route, navigation }) {
         </View>
         <View style={[{ ...Forms.slimButton }, { ...Base.marginTen }]}>
           <Button
-            title={"View order"}
+            title={"Visa order"}
             onPress={() => {
               navigation.navigate('Leverans formulär', {
                 order: order
