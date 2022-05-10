@@ -13,8 +13,8 @@ function ProductDropDown(props) {
   const [products, setProducts] = useState<Partial<Product[]>>([]);
   let productsHash: any = {};
 
-  useEffect(async () => {
-    setProducts(await productModel.getProducts());
+  useEffect(() => {
+    productModel.getProducts().then(setProducts)
   }, []);
 
   const itemsList = products.map((prod, index) => {
@@ -25,9 +25,9 @@ function ProductDropDown(props) {
   return (
     <Picker
       style={{ ...Forms.picker }}
-      selectedValue={props.delivery?.product_id}
+      selectedValue={props.currentDelivery?.product_id}
       onValueChange={(itemValue) => {
-        props.setDelivery({ ...props.delivery, product_id: itemValue });
+        props.setCurrentDelivery({ ...props.currentDelivery, product_id: itemValue });
         props.setCurrentProduct(productsHash[itemValue]);
       }}>
       {itemsList}
@@ -53,8 +53,8 @@ function DateDropDown(props) {
           onChange={(event, date) => {
             setDropDownDate(date);
 
-            props.setDelivery({
-              ...props.delivery,
+            props.setCurrentDelivery({
+              ...props.currentDelivery,
               delivery_date: date.toLocaleDateString('se-SV'),
             });
 
@@ -67,22 +67,23 @@ function DateDropDown(props) {
   );
 }
 
-export default function DeliveryForm({ navigation, setProducts }) {
-  const [delivery, setDelivery] = useState<Partial<Delivery>>({});
+export default function DeliveryForm({ navigation, setProducts, setDelivery }) {
+  const [currentDelivery, setCurrentDelivery] = useState<Partial<Delivery>>({})
   const [currentProduct, setCurrentProduct] = useState<Partial<Product>>({});
 
   async function addDelivery() {
-    await deliveryModel.addDelivery(delivery);
+    await deliveryModel.addDelivery(currentDelivery);
 
     const updatedProduct = {
       ...currentProduct,
-      stock: (currentProduct.stock || 0) + (delivery.amount || 0)
+      stock: (currentProduct.stock || 0) + (currentDelivery.amount || 0)
     };
 
     await productModel.putProduct(updatedProduct);
 
+    setDelivery(await deliveryModel.getDelivery())
     setProducts(await productModel.getProducts());
-    navigation.navigate("Inlevernas lista", { reload: true });
+    navigation.navigate("Inleverans lista", { reload: true });
   }
 
   return (
@@ -92,8 +93,8 @@ export default function DeliveryForm({ navigation, setProducts }) {
       <View style={{ ...Base.marginTen }}>
         <Text style={[{ ...Typography.label }, { ...Base.marginLeft }]}>Produkt</Text>
         <ProductDropDown
-          delivery={delivery}
-          setDelivery={setDelivery}
+          currentDelivery={currentDelivery}
+          setCurrentDelivery={setCurrentDelivery}
           setCurrentProduct={setCurrentProduct}
         />
       </View>
@@ -102,9 +103,9 @@ export default function DeliveryForm({ navigation, setProducts }) {
         <TextInput
           style={{ ...Forms.input }}
           onChangeText={(content: string) => {
-            setDelivery({ ...delivery, amount: parseInt(content) })
+            setCurrentDelivery({ ...currentDelivery, amount: parseInt(content) })
           }}
-          value={delivery?.amount?.toString()}
+          value={currentDelivery?.amount?.toString()}
           keyboardType="numeric"
         />
       </View>
@@ -112,12 +113,12 @@ export default function DeliveryForm({ navigation, setProducts }) {
         <Text style={{ ...Typography.label }}>Datum</Text>
         <TextInput
           style={{ ...Forms.input }}
-          value={delivery?.delivery_date?.toString()}
+          value={currentDelivery?.delivery_date?.toString()}
           editable={false}
         />
         <DateDropDown
-          delivery={delivery}
-          setDelivery={setDelivery}
+          currentDelivery={currentDelivery}
+          setCurrentDelivery={setCurrentDelivery}
         />
       </View>
       <View style={{ ...Base.marginTen }}>
@@ -125,9 +126,9 @@ export default function DeliveryForm({ navigation, setProducts }) {
         <TextInput
           style={{ ...Forms.input }}
           onChangeText={(content: string) => {
-            setDelivery({ ...delivery, comment: content })
+            setCurrentDelivery({ ...currentDelivery, comment: content })
           }}
-          value={delivery?.comment}
+          value={currentDelivery?.comment}
         />
       </View>
       <View style={{ ...Base.marginTen }}>

@@ -3,7 +3,6 @@ import { Platform, ScrollView, Text, TextInput, Button, View } from "react-nativ
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Base, Forms, Typography, Unique } from "../../styles"
 import invoiceModel from "../../models/invoices";
-import Invoice from '../../interfaces/invoice';
 
 function DateDropDown(props) {
   const [dropDownDate, setDropDownDate] = useState<Date>(new Date());
@@ -23,8 +22,8 @@ function DateDropDown(props) {
           onChange={(event, date) => {
             setDropDownDate(date);
 
-            props.setInvoice({
-              ...props.invoice,
+            props.setInvoices({
+              ...props.invoices,
               due_date: date.toLocaleDateString('se-SV'),
             });
 
@@ -37,16 +36,16 @@ function DateDropDown(props) {
   );
 }
 
-export default function DeliveryForm({ route, navigation }) {
+export default function DeliveryForm({ route, navigation, invoices, setInvoices }) {
   let { order } = route.params;
-  const [invoice, setInvoice] = useState<Partial<Invoice>>({});
 
   useEffect(async () => {
-    setInvoice({ ...order, order_id: order.id })
+    setInvoices({ ...order, order_id: order.id })
   }, []);
 
   async function addDelivery() {
-    await invoiceModel.pickInvoice(invoice, order)
+    await invoiceModel.pickInvoice(invoices, order)
+    setInvoices(await invoiceModel.getInvoices())
 
     navigation.navigate("Väntande fakturor", { reload: true });
   }
@@ -81,12 +80,12 @@ export default function DeliveryForm({ route, navigation }) {
         <Text style={{ ...Typography.label }}>Datum</Text>
         <TextInput
           style={{ ...Forms.input }}
-          value={invoice?.due_date?.toString()}
+          value={invoices?.due_date?.toString()}
           editable={false}
         />
         <DateDropDown
-          invoice={invoice}
-          setInvoice={setInvoice}
+          invoices={invoices}
+          setInvoices={setInvoices}
         />
       </View>
       <View style={{ ...Base.marginTen }}>

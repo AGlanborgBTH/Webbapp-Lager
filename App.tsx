@@ -4,8 +4,8 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from "./components/home/Home";
-import Pick from "./components/pick/Pick";
+import Home from "./components/home/Product";
+import Pick from "./components/pick/Order";
 import Deliveries from "./components/delivery/Deliveries";
 import Invoices from "./components/invoices/Invoices";
 import Dispatch from "./components/dispatch/Dispatch";
@@ -13,6 +13,10 @@ import Auth from "./components/auth/Auth"
 import Reset from "./components/Reset";
 import authModel from "./models/auth"
 import { Base, Forms, Typography, Unique } from "./styles"
+import Product from "./interfaces/product"
+import Delivery from "./interfaces/delivery"
+import Order from "./interfaces/order"
+import Invoice from "./interfaces/invoice"
 
 const Tab = createBottomTabNavigator();
 
@@ -27,11 +31,14 @@ const routeIcons = {
 };
 
 export default function App() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Partial<Product[]>>([]);
+  const [orders, setOrders] = useState<Partial<Order[]>>([]);
+  const [delivery, setDelivery] = useState<Partial<Delivery[]>>([]);
+  const [invoices, setInvoices] = useState<Partial<Invoice[]>>([]);
   const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
 
-  useEffect(async () => {
-    setIsLoggedIn(await authModel.loggedIn());
+  useEffect(() => {
+    authModel.loggedIn().then(setIsLoggedIn)
   }, []);
 
   return (
@@ -55,17 +62,26 @@ export default function App() {
           </Tab.Screen>
           <Tab.Screen name="Plock">
             {() => <Pick
+              orders={orders}
+              setOrders={setOrders}
               products={products}
               setProducts={setProducts}
             />}
           </Tab.Screen>
           <Tab.Screen name="Leverans">
             {() => <Dispatch
+              orders={orders}
+              setOrders={setOrders}
             />}
           </Tab.Screen>
           {isLoggedIn ?
             <Tab.Screen name="Faktura">
-              {() => <Invoices />}
+              {() => <Invoices
+                orders={orders}
+                setOrders={setOrders}
+                invoices={invoices}
+                setInvoices={setInvoices}
+              />}
             </Tab.Screen> :
             <Tab.Screen name="Logga in">
               {() => <Auth
@@ -77,12 +93,16 @@ export default function App() {
             {() => <Deliveries
               products={products}
               setProducts={setProducts}
+              delivery={delivery}
+              setDelivery={setDelivery}
             />}
           </Tab.Screen>
           <Tab.Screen name="Reset">
             {(screenProps) => <Reset
               {...screenProps}
               setProducts={setProducts}
+              setOrders={setOrders}
+              setDelivery={setDelivery}
               setIsLoggedIn={setIsLoggedIn}
             />}
           </Tab.Screen>

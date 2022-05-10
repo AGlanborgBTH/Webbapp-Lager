@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import OrderList from './OrderList';
-import PickList from './PickList';
+import List from './OrderList';
+import Form from './OrderForm';
 
 const Stack = createNativeStackNavigator();
 
@@ -8,10 +8,10 @@ export default function Pick(props) {
   return (
     <Stack.Navigator initialRouteName="Plock">
       <Stack.Screen name="Plock lista">
-        {(screenProps) => <OrderList {...screenProps} />}
+        {(screenProps) => <List {...screenProps} orders={props.orders} setOrders={props.setOrders} />}
       </Stack.Screen>
       <Stack.Screen name="Plock formulär">
-        {(screenProps) => <PickList {...screenProps} setProducts={props.setProducts} />}
+        {(screenProps) => <Form {...screenProps} setProducts={props.setProducts} />}
       </Stack.Screen>
     </Stack.Navigator>
   );

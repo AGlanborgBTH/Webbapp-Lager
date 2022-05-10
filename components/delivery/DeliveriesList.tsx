@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { View, Text, Button, ScrollView } from "react-native";
 import { Base, Forms, Typography, Unique } from "../../styles"
-import delivery from "../../models/deliveries"
+import deliveryModel from "../../models/deliveries"
 
-export default function DeliveriesList({ route, navigation }) {
+export default function DeliveriesList({ route, navigation, delivery, setDelivery }) {
   let { reload } = route.params || false;
-  const [allDeliveries, setAllDeliveries] = useState([]);
 
   if (reload) {
     reloadDeliveries();
@@ -13,39 +12,40 @@ export default function DeliveriesList({ route, navigation }) {
   }
 
   async function reloadDeliveries() {
-    setAllDeliveries(await delivery.getDelivery());
+    setDelivery(await deliveryModel.getDelivery());
   }
 
   useEffect(() => {
     reloadDeliveries();
   }, []);
 
-  const newListOfDeliveries = allDeliveries.map((delivery, index) => {
-    return <View style={[{ ...Base.stack }, { ...Base.boxMargin }]} key={index}>
-      <View style={[{ ...Base.stackItem }, { ...Unique.darker },]}>
-        <Text style={[{ ...Typography.stackText }]}>
-          Product
-        </Text>
-        <Text style={{ ...Typography.stackTextValue }}>
-          {delivery.product_name}
-        </Text>
+  const ListOfDeliveries = delivery
+    .map((content, index) => {
+      return <View style={[{ ...Base.stack }, { ...Base.boxMargin }]} key={index}>
+        <View style={[{ ...Base.stackItem }, { ...Unique.darker },]}>
+          <Text style={[{ ...Typography.stackText }]}>
+            Product
+          </Text>
+          <Text style={{ ...Typography.stackTextValue }}>
+            {content.product_name}
+          </Text>
+        </View>
+        <View style={[{ ...Base.stackItem }]}>
+          <Text style={[{ ...Typography.stackText }]}>
+            Amount
+          </Text>
+          <Text style={{ ...Typography.stackTextValue }}>
+            {content.amount}
+          </Text>
+        </View>
+        <View style={{ ...Base.paddingTen }} >
+          <Text style={{ ...Typography.normal }}>
+            {content.comment}
+          </Text>
+        </View>
+        <View style={{ ...Unique.divide }} />
       </View>
-      <View style={[{ ...Base.stackItem }]}>
-        <Text style={[{ ...Typography.stackText }]}>
-          Amount
-        </Text>
-        <Text style={{ ...Typography.stackTextValue }}>
-          {delivery.amount}
-        </Text>
-      </View>
-      <View style={{ ...Base.paddingTen }} >
-        <Text style={{ ...Typography.normal }}>
-          {delivery.comment}
-        </Text>
-      </View>
-      <View style={{ ...Unique.divide }} />
-    </View>
-  });
+    });
 
   return (
     <ScrollView style={Base.base}>
@@ -54,13 +54,13 @@ export default function DeliveriesList({ route, navigation }) {
       </Text>
       <View style={[{ ...Forms.slimButton }, { ...Base.marginTen }]}>
         <Button
-          title="Skapa ny inleverans"
+          title="Skapa ny Inleverans"
           onPress={() => {
-            navigation.navigate('Inlevernas formulär');
+            navigation.navigate('Inleverans formulär');
           }}
         />
       </View>
-      {newListOfDeliveries}
+      {ListOfDeliveries}
     </ScrollView>
   );
 };

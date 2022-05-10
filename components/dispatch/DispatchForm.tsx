@@ -5,7 +5,7 @@ import MapView from 'react-native-maps';
 import { Marker } from "react-native-maps";
 import * as Location from 'expo-location'
 import getCoordinates from "../../models/nominatim";
-import orderModule from "../../models/orders"
+import orderModel from "../../models/orders"
 
 export default function DispatchList({ route, navigation }) {
   let { order } = route.params;
@@ -53,7 +53,7 @@ export default function DispatchList({ route, navigation }) {
       "status_id": 400
     }
 
-    await orderModule.putOrder(obj)
+    await orderModel.putOrder(obj)
 
     navigation.navigate('Leverans lista', { reload: true })
   }

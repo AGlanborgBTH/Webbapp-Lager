@@ -1,5 +1,5 @@
 import { Image, View, Text, ScrollView } from 'react-native';
-import Stock from './StockList';
+import List from './ProductList';
 import warehouse from '../../assets/warehouse.jpg';
 import { Base, Forms, Typography, Unique } from "../../styles"
 
@@ -10,7 +10,7 @@ export default function Home({ products, setProducts }) {
       <View style={[{ ...Base.itemsCenter }]}>
         <Image source={warehouse} style={{ width: 320, height: 240 }} />
       </View>
-      <Stock products={products} setProducts={setProducts} />
+      <List products={products} setProducts={setProducts} />
     </ScrollView>
   );
 }

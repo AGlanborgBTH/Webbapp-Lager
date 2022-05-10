@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 import { View, Text, ScrollView, Button } from "react-native";
 import { Base, Forms, Typography, Unique } from "../../styles"
-import orderModule from "../../models/orders"
-import Order from "../../interfaces/order"
+import orderModel from "../../models/orders"
 
-export default function InvoicesList({ route, navigation }) {
+export default function InvoicesList({ route, navigation, orders, setOrders }) {
   let { reload } = route.params || false;
-  const [orders, setOrders] = useState<Partial<Order[]>>([]);
 
   if (reload) {
     reloadInvoices();
@@ -14,7 +12,7 @@ export default function InvoicesList({ route, navigation }) {
   }
 
   async function reloadInvoices() {
-    setOrders(await orderModule.getOrders());
+    setOrders(await orderModel.getOrders());
   }
 
   useEffect(() => {
@@ -64,7 +62,7 @@ export default function InvoicesList({ route, navigation }) {
         <Button
           title={"Skickade fakturor"}
           onPress={() => {
-            navigation.navigate('Skickade faktura');
+            navigation.navigate('Skickade faktura', {reload: true});
           }}
         />
       </View>

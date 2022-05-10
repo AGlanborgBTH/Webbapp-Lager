@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 import { View, Text, ScrollView, Button } from "react-native";
 import { Base, Forms, Typography, Unique } from "../../styles"
-import orderModule from "../../models/orders"
-import Order from "../../interfaces/order"
+import orderModel from "../../models/orders"
 
-export default function DispatchList({ route, navigation }) {
+export default function DispatchList({ route, navigation, orders, setOrders }) {
   const { reload } = route.params || false;
-  const [allOrders, setAllOrders] = useState<Partial<Order[]>>([]);
 
   if (reload) {
     reloadOrders();
@@ -14,14 +12,14 @@ export default function DispatchList({ route, navigation }) {
   }
 
   async function reloadOrders() {
-    setAllOrders(await orderModule.getOrders());
+    setOrders(await orderModel.getOrders());
   }
 
   useEffect(() => {
     reloadOrders();
   }, []);
 
-  const listOfDeliveries = allOrders.filter((order) => order.status_id === 200).map((order, index) => {
+  const listOfDeliveries = orders.filter((order) => order.status_id === 200).map((order, index) => {
     return (
       <View style={[{ ...Base.stack }, { ...Base.boxMargin }]} key={index}>
         <View style={[{ ...Base.stackItem }, { ...Unique.bluer },]}>

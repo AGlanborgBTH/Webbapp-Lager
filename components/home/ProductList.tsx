@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Text, View } from 'react-native';
 import config from "../../config/config.json";
-import pro from "../../models/products";
+import productModel from "../../models/products";
 import { Base, Forms, Typography, Unique } from "../../styles"
 
 export default function StockList({ products, setProducts }) {
-  useEffect(async () => {
-    setProducts(await pro.getProducts());
+  useEffect(() => {
+    productModel.getProducts().then(setProducts)
   }, []);
 
   const newList = products.map((product, index) => {

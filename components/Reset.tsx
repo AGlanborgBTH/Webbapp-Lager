@@ -1,20 +1,26 @@
 import { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { View, Button } from "react-native";
-import resetModule from "../models/reset";
-import get from "../models/actions/get"
-import delivery from "../models/deliveries"
+import resetModel from "../models/reset";
+import productModel from "../models/products"
+import ordersModel from "../models/orders"
+import deliveryModel from "../models/deliveries"
 import { Base, Forms, Typography, Unique } from "../styles"
 
-export default function Reset({ route, navigation, setProducts, setIsLoggedIn }) {
-  const [allDeliveries, setAllDeliveries] = useState([]);
-
+export default function Reset({
+  navigation,
+  setProducts,
+  setOrders,
+  setDelivery,
+  setIsLoggedIn
+}) {
   async function reset() {
-    await resetModule.resetData();
+    await resetModel.resetData();
 
-    setAllDeliveries(await delivery.getDelivery());
-    setProducts(await get.getProducts());
-    setIsLoggedIn(false)
+    setProducts(await productModel.getProducts());
+    setOrders(await ordersModel.getOrders());
+    setDelivery(await deliveryModel.getDelivery());
+    setIsLoggedIn(false);
 
     navigation.navigate("Lager", { reload: true });
   }

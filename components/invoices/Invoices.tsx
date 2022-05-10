@@ -5,13 +5,17 @@ import Pending from './InvoicePending';
 
 const Stack = createNativeStackNavigator();
 
-export default function Auth() {
+export default function Auth(props) {
   return (
     <Stack.Navigator initialRouteName="Faktura">
-      <Stack.Screen name="Väntande fakturor" component={Pending} />
-      <Stack.Screen name="Skickade faktura" component={List} />
+      <Stack.Screen name="Väntande fakturor">
+        {(screenProps) => <Pending {...screenProps} orders={props.orders} setOrders={props.setOrders} />}
+      </Stack.Screen>
+      <Stack.Screen name="Skickade faktura">
+        {(screenProps) => <List {...screenProps} invoices={props.invoices} setInvoices={props.setInvoices} />}
+      </Stack.Screen>
       <Stack.Screen name="Faktura formulär">
-        {(screenProps) => <Form {...screenProps} />}
+        {(screenProps) => <Form {...screenProps} invoices={props.invoices} setInvoices={props.setInvoices} />}
       </Stack.Screen>
     </Stack.Navigator>
   );

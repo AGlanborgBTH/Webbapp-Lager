@@ -6,11 +6,10 @@ import { Base, Forms, Typography, Unique } from "../../styles"
 
 export default function PickList({ route, navigation, setProducts }) {
   const { order } = route.params;
-  const [productsList, setProductsList] = useState([]);
   let check = 1;
 
-  useEffect(async () => {
-    setProductsList(await productModel.getProducts());
+  useEffect(() => {
+    productModel.getProducts().then(setProducts)
   }, []);
 
   async function pick() {
