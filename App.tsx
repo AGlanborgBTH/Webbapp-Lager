@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import FlashMessage from "react-native-flash-message";
 import Home from "./components/home/Product";
 import Pick from "./components/pick/Order";
 import Deliveries from "./components/delivery/Deliveries";
@@ -109,6 +110,7 @@ export default function App() {
         </Tab.Navigator>
       </NavigationContainer>
       <StatusBar style="auto" />
+      <FlashMessage position="top" />
     </SafeAreaView>
   );
 }

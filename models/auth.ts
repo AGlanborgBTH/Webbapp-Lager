@@ -15,11 +15,21 @@ const auth = {
     login: async function login(login: any) {
         const result = await post.login(login);
 
-        if (result.data) {
-            await storage.storeToken(result.data.token);
+        if (Object.prototype.hasOwnProperty.call(result, 'errors')) {
+            return {
+                title: result.errors.title,
+                message: result.errors.detail,
+                type: "danger",
+            };
         }
 
-        return result;
+        await storage.storeToken(result.data.token);
+
+        return {
+            title: "Inloggning",
+            message: result.data.message,
+            type: "success",
+        };
     },
     register: async function register(login: object) {
         return await post.register(login);
