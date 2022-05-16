@@ -1,4 +1,4 @@
-export const header1 = {
+export const header = {
     fontSize: 34,
     lineHeight: 51,
     padding: 10

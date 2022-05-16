@@ -55,7 +55,7 @@ export default function PickList({ route, navigation, setProducts }) {
 
   return (
     <ScrollView style={[{ ...Base.base }]}>
-      <Text style={[{ ...Typography.header1 }, { ...Unique.bluer }]}>{order.name}</Text>
+      <Text style={[{ ...Typography.header }, { ...Unique.bluer }]}>{order.name}</Text>
       <Text style={[{ ...Base.marginLeft }, { ...Typography.normal }]}>{order.address}</Text>
       <Text style={[{ ...Base.marginLeft }, { ...Typography.normal }]}>{order.zip} {order.city}</Text>
 

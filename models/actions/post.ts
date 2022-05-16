@@ -79,7 +79,7 @@ const add = {
 
             const result = await response.json();
 
-            return result.data;
+            return result;
         } catch (error) {
             console.log("Could not add to Register")
         }

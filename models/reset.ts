@@ -9,25 +9,6 @@ const reset = {
         await storage.deleteToken();
         await this.resetRequest();
 
-        const products = await get.getProducts();
-
-        const inleverans = {
-            "product_id": products[3]["id"],
-            "amount": 40,
-            "delivery_date": "05/31/22",
-            "comment": "Förvätad efterfråga efter nytt byggprojekt i stan godkändes"
-        };
-
-        await post.postDelivery(inleverans);
-
-        const updatedProduct = {
-            "id": products[3]["id"],
-            "name": products[3]["name"],
-            "stock": products[3]["stock"] + 40
-        };
-
-        await put.putProduct(updatedProduct);
-
         const login = {
             "email": "dbwebb@email.com",
             "password": "Pass"

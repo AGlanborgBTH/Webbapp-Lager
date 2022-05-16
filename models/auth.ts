@@ -17,7 +17,7 @@ const auth = {
 
         if (Object.prototype.hasOwnProperty.call(result, 'errors')) {
             return {
-                title: result.errors.title,
+                title: "Login fel",
                 message: result.errors.detail,
                 type: "danger",
             };
@@ -32,7 +32,23 @@ const auth = {
         };
     },
     register: async function register(login: object) {
-        return await post.register(login);
+        const result = await post.register(login);
+
+        console.log(result)
+
+        if (Object.prototype.hasOwnProperty.call(result, 'errors')) {
+            return {
+                title: "Register fel",
+                message: "E-post är skriven fel",
+                type: "danger",
+            };
+        }
+
+        return {
+            title: "Registrera",
+            message: result.data.message,
+            type: "success",
+        };
     },
     logout: async function logout() {
         await storage.deleteToken();

@@ -5,7 +5,7 @@ import { marginTen } from "../../styles/base";
 export default function AuthFields({ auth, setAuth, title, submit, navigation }) {
     return (
         <View style={Base.base}>
-            <Text style={Typography.header1}>{title}</Text>
+            <Text style={Typography.header}>{title}</Text>
             <View style={{ ...Base.marginTen }}>
                 <Text style={Typography.label}>E-post</Text>
                 <TextInput

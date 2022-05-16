@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Platform, ScrollView, Text, TextInput, Button, View } from "react-native";
 import { Picker } from '@react-native-picker/picker';
+import { showMessage } from "react-native-flash-message";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Base, Forms, Typography, Unique } from "../../styles"
 import productModel from "../../models/products";
@@ -72,18 +73,36 @@ export default function DeliveryForm({ navigation, setProducts, setDelivery }) {
   const [currentProduct, setCurrentProduct] = useState<Partial<Product>>({});
 
   async function addDelivery() {
-    await deliveryModel.addDelivery(currentDelivery);
+    if (
+      currentDelivery.product_id,
+      currentDelivery.amount,
+      currentDelivery.delivery_date
+    ) {
+      await deliveryModel.addDelivery(currentDelivery);
 
-    const updatedProduct = {
-      ...currentProduct,
-      stock: (currentProduct.stock || 0) + (currentDelivery.amount || 0)
-    };
+      const updatedProduct = {
+        ...currentProduct,
+        stock: (currentProduct.stock || 0) + (currentDelivery.amount || 0)
+      };
 
-    await productModel.putProduct(updatedProduct);
+      await productModel.putProduct(updatedProduct);
 
-    setDelivery(await deliveryModel.getDelivery())
-    setProducts(await productModel.getProducts());
-    navigation.navigate("Inleverans lista", { reload: true });
+      setDelivery(await deliveryModel.getDelivery())
+      setProducts(await productModel.getProducts());
+      navigation.navigate("Inleverans lista", { reload: true });
+
+      showMessage({
+        message: "Inleverans",
+        description: "Inleverans skapad",
+        type: "success"
+      });
+    } else {
+      showMessage({
+        message: "Inleverans fel",
+        description: "Information saknas",
+        type: "warning",
+      });
+    }
   }
 
   return (
