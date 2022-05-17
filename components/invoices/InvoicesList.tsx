@@ -7,17 +7,9 @@ export default function InvoicesList({ route, invoices, setInvoices }) {
   let { reload } = route.params || false;
 
   if (reload) {
-    reloadInvoices();
+    invoicesModule.getInvoices().then(setInvoices)
     route.params.reload = false
   }
-
-  async function reloadInvoices() {
-    setInvoices(await invoicesModule.getInvoices());
-  }
-
-  useEffect(() => {
-    reloadInvoices();
-  }, []);
 
   const SentInvoices = invoices
     .map((invoice, index) => {

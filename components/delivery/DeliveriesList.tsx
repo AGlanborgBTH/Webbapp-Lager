@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { View, Text, Button, ScrollView } from "react-native";
 import { Base, Forms, Typography, Unique } from "../../styles"
 import deliveryModel from "../../models/deliveries"
@@ -7,17 +6,9 @@ export default function DeliveriesList({ route, navigation, delivery, setDeliver
   let { reload } = route.params || false;
 
   if (reload) {
-    reloadDeliveries();
+    deliveryModel.getDelivery().then(setDelivery)
     route.params.reload = false
   }
-
-  async function reloadDeliveries() {
-    setDelivery(await deliveryModel.getDelivery());
-  }
-
-  useEffect(() => {
-    reloadDeliveries();
-  }, []);
 
   const ListOfDeliveries = delivery
     .map((content, index) => {

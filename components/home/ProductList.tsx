@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react';
 import { Text, View } from 'react-native';
-import productModel from "../../models/products";
 import { Base, Forms, Typography, Unique } from "../../styles"
+import productModel from "../../models/products"
 
-export default function StockList({ products, setProducts }) {
-  useEffect(() => {
+export default function StockList({ products, setProducts, route }) {
+  const { reload } = route.params || false;
+
+  if (reload) {
     productModel.getProducts().then(setProducts)
-  }, []);
+    route.params.reload = false
+  }
 
   const list = products.map((product, index) => {
     if (product.stock == 0) {

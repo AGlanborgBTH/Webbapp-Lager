@@ -1,23 +1,15 @@
 import { useState, useEffect } from 'react';
 import { View, Text, Button, ScrollView } from "react-native";
 import { Base, Forms, Typography, Unique } from "../../styles"
-import ordersModel from "../../models/orders"
+import orderModel from "../../models/orders"
 
 export default function OrderList({ route, navigation, orders, setOrders }) {
   const { reload } = route.params || false;
 
   if (reload) {
-    reloadOrders();
+    orderModel.getOrders().then(setOrders)
     route.params.reload = false;
   }
-
-  async function reloadOrders() {
-    setOrders(await ordersModel.getOrders());
-  }
-
-  useEffect(() => {
-    reloadOrders();
-  }, []);
 
   const listOfOrders = orders
     .filter(order => order.status_id === 100)

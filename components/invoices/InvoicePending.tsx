@@ -7,17 +7,9 @@ export default function InvoicesList({ route, navigation, orders, setOrders }) {
   let { reload } = route.params || false;
 
   if (reload) {
-    reloadInvoices();
+    orderModel.getOrders().then(setOrders)
     route.params.reload = false
   }
-
-  async function reloadInvoices() {
-    setOrders(await orderModel.getOrders());
-  }
-
-  useEffect(() => {
-    reloadInvoices();
-  }, []);
 
   const PendingInvoices = orders.filter((order) => order.status_id === 400).map((order, index) => {
     return (

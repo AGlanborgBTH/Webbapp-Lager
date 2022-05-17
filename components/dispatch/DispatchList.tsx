@@ -7,17 +7,9 @@ export default function DispatchList({ route, navigation, orders, setOrders }) {
   const { reload } = route.params || false;
 
   if (reload) {
-    reloadOrders();
+    orderModel.getOrders().then(setOrders)
     route.params.reload = false
   }
-
-  async function reloadOrders() {
-    setOrders(await orderModel.getOrders());
-  }
-
-  useEffect(() => {
-    reloadOrders();
-  }, []);
 
   const listOfDeliveries = orders.filter((order) => order.status_id === 200).map((order, index) => {
     return (

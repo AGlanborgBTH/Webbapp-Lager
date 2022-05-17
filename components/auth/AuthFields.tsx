@@ -15,6 +15,8 @@ export default function AuthFields({ auth, setAuth, title, submit, navigation })
                     }}
                     value={auth?.email}
                     keyboardType="email-address"
+                    autoCapitalize="none"
+                    testID="email-field"
                 />
             </View>
             <View style={{ ...Base.marginTen }}>
@@ -26,6 +28,7 @@ export default function AuthFields({ auth, setAuth, title, submit, navigation })
                     }}
                     value={auth?.password}
                     secureTextEntry={true}
+                    testID="password-field"
                 />
             </View>
             <View style={[{ ...Forms.slimButton }, { ...marginTen }]}>
@@ -34,6 +37,7 @@ export default function AuthFields({ auth, setAuth, title, submit, navigation })
                     onPress={() => {
                         submit();
                     }}
+                    accessibilityLabel={`${title} genom att trycka`}
                 />
             </View>
             {title === "Logga in" &&

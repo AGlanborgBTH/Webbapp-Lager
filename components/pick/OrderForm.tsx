@@ -8,10 +8,6 @@ export default function PickList({ route, navigation, setProducts }) {
   const { order } = route.params;
   let check = 1;
 
-  useEffect(() => {
-    productModel.getProducts().then(setProducts)
-  }, []);
-
   async function pick() {
     await orderModel.pickOrder(order);
     setProducts(await productModel.getProducts());

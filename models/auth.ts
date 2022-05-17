@@ -34,8 +34,6 @@ const auth = {
     register: async function register(login: object) {
         const result = await post.register(login);
 
-        console.log(result)
-
         if (Object.prototype.hasOwnProperty.call(result, 'errors')) {
             return {
                 title: "Register fel",

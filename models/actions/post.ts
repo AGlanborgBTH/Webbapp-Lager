@@ -98,7 +98,6 @@ const add = {
             });
         } catch (error) {
             console.log("Could not add to Invoice")
-            console.log(error)
         }
     },
 };

@@ -12,6 +12,10 @@ import Invoices from "./components/invoices/Invoices";
 import Dispatch from "./components/dispatch/Dispatch";
 import Auth from "./components/auth/Auth"
 import Reset from "./components/Reset";
+import productModel from "./models/products"
+import orderModel from "./models/orders"
+import deliveryModel from "./models/deliveries"
+import invoicesModule from "./models/invoices"
 import authModel from "./models/auth"
 import { Base, Forms, Typography, Unique } from "./styles"
 import Product from "./interfaces/product"
@@ -39,6 +43,10 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
 
   useEffect(() => {
+    productModel.getProducts().then(setProducts)
+    orderModel.getOrders().then(setOrders)
+    deliveryModel.getDelivery().then(setDelivery)
+    invoicesModule.getInvoices().then(setInvoices)
     authModel.loggedIn().then(setIsLoggedIn)
   }, []);
 
