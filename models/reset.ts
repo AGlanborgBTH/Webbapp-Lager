@@ -1,7 +1,5 @@
 import config from "../config/config.json";
-import get from "./actions/get"
 import post from "./actions/post"
-import put from "./actions/put"
 import storage from "./storage"
 
 const reset = {
@@ -15,6 +13,18 @@ const reset = {
         };
 
         await post.register(login);
+
+        const product = {
+            "name": "Mutter M4",
+            "article_number": "1204-TNT",
+            "description": "Mutter M4, värmförsinkad, passar 1204-RNT",
+            "specifiers": "{'diameter' : '4mm'}",
+            "stock": 0,
+            "location": "A1C5",
+            "price": 12
+        }
+
+        await post.postProduct(product)
     },
     resetRequest: async function resetRequest() {
         try {

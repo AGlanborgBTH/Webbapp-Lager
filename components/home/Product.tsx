@@ -10,6 +10,9 @@ export default function Home({ products, setProducts }) {
       <View style={[{ ...Base.itemsCenter }]}>
         <Image source={warehouse} style={{ width: 320, height: 240 }} />
       </View>
+      <Text style={[{ ...Typography.header }, { ...Base.marginTen }]}>
+        Lagerförteckning
+      </Text>
       <List products={products} setProducts={setProducts} />
     </ScrollView>
   );
