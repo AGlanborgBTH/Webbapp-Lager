@@ -2,14 +2,7 @@ import { Text, View } from 'react-native';
 import { Base, Forms, Typography, Unique } from "../../styles"
 import productModel from "../../models/products"
 
-export default function StockList({ products, setProducts, route }) {
-  const { reload } = route.params || false;
-
-  if (reload) {
-    productModel.getProducts().then(setProducts)
-    route.params.reload = false
-  }
-
+export default function ProductList({ products, setProducts }) {
   const list = products.map((product, index) => {
     if (product.stock == 0) {
       return (
