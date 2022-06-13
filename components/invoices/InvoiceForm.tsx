@@ -39,7 +39,7 @@ function DateDropDown(props) {
 export default function DeliveryForm({ route, navigation, invoices, setInvoices }) {
   let { order } = route.params;
 
-  useEffect(async () => {
+  useEffect(() => {
     setInvoices({ ...order, order_id: order.id })
   }, []);
 

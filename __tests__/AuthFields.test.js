@@ -12,7 +12,7 @@ const navigation = () => false
 test('testing authfield for login', async () => {
     const title = "Logga in"
 
-    const { getAllByText, getByTestId, getAllByA11yLabel } = render(<AuthFields
+    const { getAllByText, getByTestId, getByA11yLabel } = render(<AuthFields
         auth={auth}
         setAuth={setAuth}
         submit={mockSubmit}
@@ -34,7 +34,7 @@ test('testing authfield for login', async () => {
 
     const a11yLabel = `${title} genom att trycka`
 
-    const submitButton = getAllByA11yLabel(a11yLabel)
+    const submitButton = getByA11yLabel(a11yLabel)
 
     expect(submitButton).toBeDefined()
 
@@ -50,7 +50,7 @@ test('testing authfield for login', async () => {
 
     expect(auth?.password).toEqual(fakePassword)
 
-    fireEvent.press(submitButton)
+    fireEvent.press(getByA11yLabel(`${title} genom att trycka`))
 
     expect(mockSubmit).toHaveBeenCalled()
 });
