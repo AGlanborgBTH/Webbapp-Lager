@@ -15,7 +15,7 @@ export default function Auth(props) {
         {(screenProps) => <List {...screenProps} invoices={props.invoices} setInvoices={props.setInvoices} />}
       </Stack.Screen>
       <Stack.Screen name="Faktura formulär">
-        {(screenProps) => <Form {...screenProps} invoices={props.invoices} setInvoices={props.setInvoices} />}
+        {(screenProps) => <Form {...screenProps} invoices={props.invoices} setInvoices={props.setInvoices} submit={null} />}
       </Stack.Screen>
     </Stack.Navigator>
   );

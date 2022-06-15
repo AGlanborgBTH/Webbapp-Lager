@@ -36,7 +36,7 @@ function DateDropDown(props) {
   );
 }
 
-export default function DeliveryForm({ route, navigation, invoices, setInvoices }) {
+export default function DeliveryForm({ route, navigation, invoices, setInvoices, submit }) {
   let { order } = route.params;
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function DeliveryForm({ route, navigation, invoices, setInvoices 
 
   let price = 0
 
-  order.order_items.forEach(product => {
+  order.order_items.forEach((product) => {
     price += product.amount * product.price
   });
 
@@ -66,6 +66,7 @@ export default function DeliveryForm({ route, navigation, invoices, setInvoices 
           style={{ ...Forms.input }}
           value={order.name}
           editable={false}
+          testID="name-field"
         />
       </View>
       <View style={{ ...Base.marginTen }}>
@@ -74,14 +75,18 @@ export default function DeliveryForm({ route, navigation, invoices, setInvoices 
           style={{ ...Forms.input }}
           value={price.toString()}
           editable={false}
+          testID="price-field"
         />
       </View>
       <View style={{ ...Base.marginTen }}>
         <Text style={{ ...Typography.label }}>Datum</Text>
         <TextInput
           style={{ ...Forms.input }}
+          onChangeText={(content: string) => {
+            setInvoices({ ...invoices, due_date: content })
+          }}
           value={invoices?.due_date?.toString()}
-          editable={false}
+          testID="date-field"
         />
         <DateDropDown
           invoices={invoices}
@@ -93,8 +98,13 @@ export default function DeliveryForm({ route, navigation, invoices, setInvoices 
           <Button
             title="Skapa inleverans"
             onPress={() => {
-              addDelivery();
+              if (!submit) {
+                addDelivery();
+              } else {
+                submit();
+              }
             }}
+            accessibilityLabel={"Skapa inleverans"}
           />
         </View>
       </View>

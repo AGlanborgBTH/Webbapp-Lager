@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { View, Text, ScrollView, Button } from "react-native";
 import { Base, Forms, Typography, Unique } from "../../styles"
 import orderModel from "../../models/orders"
